@@ -1,3 +1,4 @@
+.gitignore
 node_modules
 scripts/Smelly Api/plugins/*
 !scripts/Smelly Api/plugins/_default
