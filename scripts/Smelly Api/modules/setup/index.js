@@ -9,24 +9,10 @@ SA.build.command.register(
     usage: [""],
   },
   (chatmsg, args) => {
-    let tps = "";
     let pingTick = world.events.tick.subscribe(({ currentTick, deltaTime }) => {
-      let deltaTimeArray = [];
-      deltaTimeArray.unshift(deltaTime);
-      if (deltaTimeArray.length > 250) {
-        deltaTimeArray.pop();
-      }
-      tps =
-        1 /
-          (deltaTimeArray.reduce(
-            (previousValue, currentValue) => previousValue + currentValue
-          ) /
-            deltaTimeArray.length) +
-        "," +
-        deltaTimeArray.length;
+      world.events.tick.unsubscribe(pingTick);
+      return SA.build.chat.broadcast(`Server TPS: ${1 / deltaTime}`);
     });
-    world.events.tick.unsubscribe(pingTick);
-    SA.build.chat.runCommand(`say TPS: ${tps}`);
   }
 );
 
@@ -65,13 +51,14 @@ SA.build.command.register(
       SA.build.chat.broadcast(
         `§2--- Showing help page ${current_page} of ${max_pages} (-help <page>) ---`
       );
-      console.warn(commands);
-      console.warn(commands.splice(0, 0));
-      commands.forEach((command) => {
-        SA.build.chat.broadcast(
-          `${SA.prefix}${command.name} ${command.description}`
-        );
-      });
+
+      [...commands]
+        .splice(current_page * 7 - 7, current_page * 7)
+        .forEach((command) => {
+          SA.build.chat.broadcast(
+            `${SA.prefix}${command.name} ${command.description}`
+          );
+        });
     }
   }
 );

@@ -24,8 +24,24 @@ export class Database {
     if (this.tableName.includes("|")) {
       throw new Error("Prefix cannot contain |");
     }
-    this.syncEntities();
+    let loaded = false;
+    let TickCallback = world.events.tick.subscribe((callback) => {
+      // first entity has been spawned so your able to get entitys now
+      try {
+        world.getDimension("overworld").runCommand(`testfor @a`);
+
+        try {
+          this.syncEntities();
+          loaded = true;
+        } catch (error) {
+          console.warn(error + error.stack);
+        }
+
+        world.events.tick.unsubscribe(TickCallback);
+      } catch (error) {}
+    });
     world.events.tick.subscribe((tickEvent) => {
+      if (!loaded) return;
       if (this._entities.length == 0) {
         // enttiies is not set
         console.warn(`entitys not set`);

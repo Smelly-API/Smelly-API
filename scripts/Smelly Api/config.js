@@ -1,4 +1,6 @@
 export const configuration = {
+  version: '1.0.0',
+  mcbe_version: '1.18.10',
   prefix: "-", //Default custom command prefix
   DATABASE: {
     FILE_NAME: "database",
