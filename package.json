@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@types/mojang-minecraft": "^0.1.3"
+    "@types/mojang-gametest": "^0.1.2",
+    "@types/mojang-minecraft": "^0.1.4"
   }
 }

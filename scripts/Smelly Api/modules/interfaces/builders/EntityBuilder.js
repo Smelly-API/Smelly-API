@@ -1,4 +1,10 @@
-import { world, BlockLocation, EntityQueryOptions } from "mojang-minecraft";
+import {
+  world,
+  BlockLocation,
+  EntityQueryOptions,
+  Entity,
+  Location,
+} from "mojang-minecraft";
 import * as SA from "../../index.js";
 export class EntityBuilder {
   /**
@@ -23,21 +29,17 @@ export class EntityBuilder {
    * @param {number} x X position of the entity
    * @param {number} y Y position of the entity
    * @param {number} z Z position of the entity
-   * @param {dimension} [dimension] Dimesion of the entity
-   * @param {Array<string>} [ignoreTypes] Entity type to not look for
-   * @returns {Array<getEntityAtPosReturn>}
-   * @example EntityBuilder.getEntityAtPos([0, 5, 0], { dimension: 'nether', ignoreType: ['minecraft:player']});
+   * @param {String} dimension Dimesion of the entity
+   * @returns {Entity}
+   * @example EntityBuilder.getEntityAtPos(0, 5, 0, { dimension: 'nether', ignoreType: ['minecraft:player']});
    */
-  getAtPos(x, y, z, target_id, ignoreTypes = ["minecraft:player"]) {
+  getAtPos(x, y, z, dimension = "overworld") {
     try {
-      let q = new EntityQueryOptions();
-      q.type = target_id;
-      q.location = new Location(parseInt(x), parseInt(y), parseInt(z));
-      q.excludeTypes = ignoreTypes;
-
-      return world.getDimension("overworld").getEntities(q)[0] ?? null;
+      return world
+        .getDimension(dimension)
+        .getEntitiesAtBlockLocation(new BlockLocation(x, y, z))[0];
     } catch (error) {
-      return null;
+      console.warn(error + error.stack);
     }
   }
   /**

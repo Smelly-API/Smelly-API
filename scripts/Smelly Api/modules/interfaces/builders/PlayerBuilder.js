@@ -1,4 +1,4 @@
-import { world, BlockLocation } from "mojang-minecraft";
+import { world, BlockLocation, Player } from "mojang-minecraft";
 import * as SA from "../../index.js";
 export class PlayerBuilder {
   /**
@@ -39,6 +39,18 @@ export class PlayerBuilder {
   getTags(playerName) {
     const player = this.fetch(playerName);
     return player.getTags();
+  }
+  /**
+   * Gets the player dimension off of nametag
+   * @param {string} playerName Requirements for the entity
+   * @returns "overworld" | "the end" | "nether"
+   * @example getDimension('Smell of curry');
+   */
+  getDimension(playerName) {
+    const player = this.fetch(playerName);
+    for (const dimension of ["overworld", "nether", "the end"]) {
+      if (player.dimension == world.getDimension(dimension)) return dimension;
+    }
   }
   /**
    * Look for a tag on player(s)

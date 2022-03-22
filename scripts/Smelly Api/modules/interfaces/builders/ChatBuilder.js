@@ -3,17 +3,23 @@ import * as SA from "../../index.js";
 class ChatBuilder {
   /**
    * Broadcast a message in chat
-   * @param {string} text Message you want to broadcast in chat
-   * @param {string} [player] Player you want to broadcast to
-   * @returns {runCommandReturn}
-   * @example ServerBuilder.broadcast('Hello World!');
+   * @param {string} text Message or a lang code
+   * @param {string} player Player you want to broadcast to
+   * @param {Array<string>} with_ lang arguments
+   * @returns {any} For commands that return data, returns a JSON structure with command response values.
+   * @example broadcast('Hello World!');
    */
-  broadcast(text, player) {
-    return SA.build.chat.runCommand(
-      `tellraw ${
-        player ? `"${player}"` : "@a"
-      } {"rawtext":[{"translate":${JSON.stringify(text)}}]}`
-    );
+  broadcast(text, player, args = []) {
+    try {
+      args = args.map(String).filter((n) => n);
+      return SA.build.chat.runCommand(
+        `tellraw ${
+          player ? `"${player}"` : "@a"
+        } {"rawtext":[{"translate":"${text}","with":${JSON.stringify(args)}}]}`
+      );
+    } catch (error) {
+      return { error: true };
+    }
   }
   /**
    * Runs a Command
@@ -47,11 +53,13 @@ class ChatBuilder {
         throw new Error(
           "[Server]: runCommands(): Error - First command in the Array CANNOT be Conditional"
         );
+      let error = false;
       commands.forEach((cmd) => {
-        this.runCommand(cmd.replace(conditionalRegex, ""));
+        if (error && conditionalRegex.test(cmd)) return;
+        error = this.runCommand(cmd.replace(conditionalRegex, "")).error;
       });
     } catch (error) {
-      return { error: true };
+      return { error: error };
     }
   }
 }
