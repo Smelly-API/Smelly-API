@@ -37,9 +37,9 @@ export class EntityBuilder {
     try {
       return world
         .getDimension(dimension)
-        .getEntitiesAtBlockLocation(new BlockLocation(x, y, z))[0];
+        .getEntitiesAtBlockLocation(new BlockLocation(x, y, z));
     } catch (error) {
-      console.warn(error + error.stack);
+      return [];
     }
   }
   /**

@@ -24,7 +24,7 @@ export class CommandBuilder {
         if (
           !getCommand ||
           (getCommand.tags.length > 0 &&
-            getCommand.tags.every((i) => data.sender.getTags().includes(i)))
+            !getCommand.tags.every((i) => data.sender.getTags().includes(i)))
         ) {
           return SA.build.chat.runCommand(
             `tellraw "${data.sender.nameTag}" {"rawtext":[{"text":"§c"},{"translate":"commands.generic.unknown", "with": ["§f${command}§c"]}]}`
