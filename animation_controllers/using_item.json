@@ -1,0 +1,25 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.using_item": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "scroll": "query.is_using_item"
+            }
+          ],
+          "on_exit": ["/tag @s add using_item"]
+        },
+        "scroll": {
+          "transitions": [
+            {
+              "default": "!query.is_using_item"
+            }
+          ],
+          "on_exit": ["/tag @s remove using_item"]
+        }
+      }
+    }
+  }
+}

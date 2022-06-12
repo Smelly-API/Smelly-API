@@ -1,7 +1,7 @@
 .gitignore
 node_modules
-scripts/Smelly Api/plugins/*
-!scripts/Smelly Api/plugins/_default
-!scripts/Smelly Api/plugins/Chat Ranks
-!scripts/Smelly Api/plugins/index.js
-/package-lock.json
+package-lock.json
+scripts/Smelly Api/vendor/*
+!scripts/Smelly Api/vendor/Smelly API
+!scripts/Smelly Api/vendor/Chat Ranks
+!scripts/Smelly Api/vendor/autoload.js

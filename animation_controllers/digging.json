@@ -1,0 +1,25 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.digging": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "scroll": "query.is_digging"
+            }
+          ],
+          "on_exit": ["/tag @s add digging"]
+        },
+        "scroll": {
+          "transitions": [
+            {
+              "default": "!query.is_digging"
+            }
+          ],
+          "on_exit": ["/tag @s remove digging"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "format_version": "1.18.0",
+  "minecraft:item": {
+    "description": {
+      "identifier": "we:tool"
+    },
+    "components": {
+      "minecraft:max_stack_size": 1,
+      "minecraft:foil": true,
+      "minecraft:icon": {
+        "texture": "shovel",
+        "frame": 0
+      },
+      "minecraft:display_name": {
+        "value": "World Edit Selection Wand\nDestroy Block for Pos1 and interact with block for pos2"
+      },
+      "minecraft:cooldown": {
+        "duration": 0.1,
+        "category": "we:wand"
+      }
+    }
+  }
+}

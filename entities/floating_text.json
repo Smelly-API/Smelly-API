@@ -2,7 +2,7 @@
   "format_version": "1.17.100",
   "minecraft:entity": {
     "description": {
-      "identifier": "binocraft:floating_text",
+      "identifier": "mcbehub:floating_text",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
@@ -14,12 +14,13 @@
     },
     "components": {
       "minecraft:type_family": {
-        "family": ["binocraft"]
+        "family": ["mcbehub"]
       },
       "minecraft:fire_immune": true,
       "minecraft:movement": {
         "value": 0
       },
+      "minecraft:movement.basic": {},
       "minecraft:damage_sensor": {
         "triggers": [
           {

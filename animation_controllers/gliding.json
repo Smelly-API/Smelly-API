@@ -1,0 +1,25 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.gliding": {
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "scroll": "query.is_gliding"
+            }
+          ],
+          "on_exit": ["/tag @s add gliding"]
+        },
+        "scroll": {
+          "transitions": [
+            {
+              "default": "!query.is_gliding"
+            }
+          ],
+          "on_exit": ["/tag @s remove gliding"]
+        }
+      }
+    }
+  }
+}

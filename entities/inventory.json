@@ -1,0 +1,119 @@
+{
+  "format_version": "1.17.10",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "mcbehub:inventory",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {},
+        "minecraft:explode": {}
+      },
+      "size:27": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 27
+        }
+      },
+      "size:36": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 36
+        }
+      },
+      "size:45": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 45
+        }
+      },
+      "size:54": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 54
+        }
+      },
+      "size:81": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 81
+        }
+      },
+      "size:108": {
+        "minecraft:inventory": {
+          "container_type": "inventory",
+          "inventory_size": 108
+        }
+      }
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 1,
+        "height": 2
+      },
+      "minecraft:movement": {
+        "value": 0
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:inventory": {
+        "container_type": "inventory",
+        "inventory_size": 54
+      }
+    },
+    "events": {
+      "despawn": {
+        "add": {
+          "component_groups": ["despawn"]
+        }
+      },
+      "size:reset": {
+        "remove": {
+          "component_groups": [
+            "size:27",
+            "size:36",
+            "size:54",
+            "size:81",
+            "size:108"
+          ]
+        }
+      },
+      "size:27": {
+        "trigger": "size:reset",
+        "add": {
+          "component_groups": ["size:27"]
+        }
+      },
+      "size:36": {
+        "trigger": "size:reset",
+        "add": {
+          "component_groups": ["size:36"]
+        }
+      },
+      "size:54": {
+        "trigger": "size:reset",
+        "add": {
+          "component_groups": ["size:54"]
+        }
+      },
+      "size:81": {
+        "trigger": "size:reset",
+        "add": {
+          "component_groups": ["size:81"]
+        }
+      },
+      "size:108": {
+        "trigger": "size:reset",
+        "add": {
+          "component_groups": ["size:108"]
+        }
+      }
+    }
+  }
+}
