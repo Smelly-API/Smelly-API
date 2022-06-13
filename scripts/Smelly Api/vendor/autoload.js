@@ -14,16 +14,7 @@
  */
 const Plugins = [
   "Smelly Api",
-  // "Chat Ranks",
-  // "home",
-  // "Leaderboards",
-  // "Factions",
-  // "Stackable Mobs",
-  // "World Edit",
-  // "Anti Cheat",
-  "Auction House",
-  // "Gambling",
-  // "Shop"
+  "Chat Ranks"
 ];
 
 for (const plugin of Plugins) {
