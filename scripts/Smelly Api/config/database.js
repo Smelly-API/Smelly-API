@@ -8,4 +8,16 @@
 | Size. Its releated to minecrafts 32k bit limit.
 |
 */
-export const MAX_DATABASE_STRING_SIZE = 4294967295;
+export const MAX_DATABASE_STRING_SIZE = 32000;
+
+/*
+|--------------------------------------------------------------------------
+| Max Dynamic property size
+|--------------------------------------------------------------------------
+|
+| This is thje max size a dynamic string property can be 
+| Setting this allows us to split up the data and know the max length
+| Its a relation to memory transfer size
+|
+*/
+export const MAX_DYNAMIC_PROPERTY_SIZE = 4294967295;

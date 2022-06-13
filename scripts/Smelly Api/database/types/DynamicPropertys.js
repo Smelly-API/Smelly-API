@@ -1,5 +1,5 @@
 import { DynamicPropertiesDefinition, world } from "mojang-minecraft";
-import { MAX_DATABASE_STRING_SIZE } from "../../config/database";
+import { MAX_DYNAMIC_PROPERTY_SIZE } from "../../config/database";
 
 /**
  * Minecraft Bedrock Gametest Database
@@ -22,7 +22,7 @@ const TABLES = [];
 world.events.worldInitialize.subscribe(({ propertyRegistry }) => {
   let def = new DynamicPropertiesDefinition();
   for (const table of TABLES) {
-    def.defineString(table, MAX_DATABASE_STRING_SIZE);
+    def.defineString(table, MAX_DYNAMIC_PROPERTY_SIZE);
   }
   propertyRegistry.registerWorldDynamicProperties(def);
 });

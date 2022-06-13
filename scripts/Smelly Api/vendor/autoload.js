@@ -12,10 +12,7 @@
 /**
  * An array of folder names, to add a plugin simply add the folder name to this array
  */
-const Plugins = [
-  "Smelly Api",
-  "Chat Ranks"
-];
+const Plugins = ["Smelly Api", "Chat Ranks"];
 
 for (const plugin of Plugins) {
   const start = Date.now();
