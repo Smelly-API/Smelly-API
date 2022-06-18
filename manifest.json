@@ -3,23 +3,23 @@
   "header": {
     "name": "pack.name",
     "description": "pack.description",
-    "min_engine_version": [1, 17, 0],
-    "uuid": "5d684bff-ef0a-4fb4-bebc-86a5ff6df944",
-    "version": [2, 0, 0]
+    "min_engine_version": [1, 19, 0],
+    "uuid": "4d2c7522-f064-448d-a697-9d7a1c4e4aa6",
+    "version": [3, 0, 0]
   },
   "modules": [
     {
       "description": "Data Module",
       "type": "data",
-      "uuid": "0bbeee8a-1c69-4205-b3bf-1306aee43c08",
-      "version": [2, 0, 0]
+      "uuid": "18a5ebd8-5769-474a-8b74-6d144f4248d4",
+      "version": [3, 0, 0]
     },
     {
       "description": "Gametest Module",
       "language": "javascript",
       "type": "script",
-      "uuid": "f5fa40d9-4615-4afc-93d5-08bb1498aefc",
-      "version": [0, 0, 1],
+      "uuid": "28ce9a9e-d4fc-4d33-90b2-0c5c0ea8f643",
+      "version": [3, 0, 0],
       "entry": "scripts/index.js"
     }
   ],
@@ -36,13 +36,13 @@
     },
     {
       "description": "mojang-minecraft-ui module",
-      "uuid": "2BD50A27-AB5F-4F40-A596-3641627C635E",
+      "uuid": "2bd50a27-ab5f-4f40-a596-3641627c635e",
       "version": [0, 1, 0]
     }
   ],
   "metadata": {
     "authors": ["Smell of curry"],
     "license": "MIT",
-    "url": "https://github.com/smell-of-curry/Smelly-Anti-Cheat"
+    "url": "https://github.com/smell-of-curry/Smelly-API"
   }
 }
