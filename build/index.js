@@ -18,6 +18,8 @@ const PLUGINS =
     ? args[0].split(",")
     : AVAILABLE_PLUGINS.filter((f) => f != "autoload.js");
 
+PLUGINS.push(`Smelly Api`);
+
 /**
  * The FILE_NAME of this pack on output
  */

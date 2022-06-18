@@ -14,14 +14,14 @@ import { Group } from "./app/Contracts/Permission/Group.js";
 import { text } from "./lang/text.js";
 import { emoji } from "./lang/emoji.js";
 import { profanity } from "./lang/profanirty.js";
+import { ItemDatabase } from "./database/types/Item.js";
+import { ScoreboardDatabase } from "./database/types/Scoreboard.js";
+import { DynamicPropertysDatabase } from "./database/types/DynamicPropertys.js";
 import * as form from "./app/Providers/Form.js";
 import * as configuration from "./config/index.js";
 import * as tables from "./database/tables.js";
 import * as scheduling from "./app/Utilities/scheduling.js";
 import * as format from "./app/Utilities/formatter.js";
-import { ItemDatabase } from "./database/types/Item.js";
-import { ScoreboardDatabase } from "./database/types/Scoreboard.js";
-import { DynamicPropertysDatabase } from "./database/types/DynamicPropertys.js";
 
 /**
  * Smelly API
@@ -34,7 +34,6 @@ import { DynamicPropertysDatabase } from "./database/types/DynamicPropertys.js";
  * Because it could end up breaking smelly api and its connected plugins
  * --------------------------------------------------------------------------
  */
-
 export class SA {
   static prefix = configuration.commands.PREFIX;
   static version = configuration.app.VERSION;
@@ -83,6 +82,10 @@ export class SA {
     return currentPing;
   }
 
+  /**
+   * Gets ths current tick of the server
+   * @returns {Promise<number>}
+   */
   static async getTick() {
     let tick = 0;
     let e = world.events.tick.subscribe(({ currentTick }) => {
