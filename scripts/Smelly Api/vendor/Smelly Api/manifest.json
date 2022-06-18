@@ -1,0 +1,12 @@
+{
+  "header": {
+    "name": "Smelly API default",
+    "description": "Adds help command and other default commands for smelly API",
+    "version": [5, 0, 0]
+  },
+  "metadata": {
+    "authors": ["Smell of curry"],
+    "license": "MIT",
+    "url": "https://github.com/smell-of-curry/Smelly-Anti-Cheat"
+  }
+}

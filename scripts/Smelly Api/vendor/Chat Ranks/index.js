@@ -21,6 +21,12 @@ import { CHAT_COOLDOWN, DEFAULT_RANK } from "./config.js";
 const COOLDOWNS = {};
 
 /**
+ * Formats the Chat Ranks
+ */
+const FORMAT = (player) =>
+  `§l§8[§r${ranks(player).join("§r§l§8][§r")}§l§8]§r §7${player.nameTag}:§r`;
+
+/**
  * Gets ranks from player
  * @param {Player} player player to get ranks from
  * @returns {string[]}
@@ -34,18 +40,15 @@ function ranks(player) {
 }
 
 world.events.beforeChat.subscribe((data) => {
+  let { message, sender } = data;
   data.cancel = true;
-  if (data.message.startsWith(SA.prefix)) return;
+  if (message.startsWith(SA.prefix)) return;
   try {
-    const cooldown = COOLDOWNS[data.sender.nameTag];
+    const cooldown = COOLDOWNS[sender.nameTag];
     if (cooldown) return cooldown.reply();
-    new Cooldown(data.sender.nameTag);
+    new Cooldown(sender.nameTag);
 
-    return SA.Providers.chat.broadcast(
-      `§l§8[§r${ranks(data.sender).join("§r§l§8][§r")}§l§8]§r §7${
-        data.sender.nameTag
-      }:§r ${data.message}`
-    );
+    return SA.Providers.chat.broadcast(`${FORMAT(sender)} ${message}`);
   } catch (error) {
     return (data.cancel = false), console.warn(`${error}, ${error.stack}`);
   }

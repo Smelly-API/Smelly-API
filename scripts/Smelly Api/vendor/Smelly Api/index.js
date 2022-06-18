@@ -1,6 +1,5 @@
-import { BlockLocation, world } from "mojang-minecraft";
+import { world } from "mojang-minecraft";
 import { COMMAND_PATHS } from "../../app/Contracts/Commands/Command.js";
-import { Permission } from "../../app/Contracts/Permission/Permission.js";
 import { SA } from "../../index.js";
 
 new SA.Command(
