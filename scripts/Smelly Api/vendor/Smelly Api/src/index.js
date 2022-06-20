@@ -1,6 +1,6 @@
 import { world } from "mojang-minecraft";
-import { COMMAND_PATHS } from "../../app/Contracts/Commands/Command.js";
-import { SA } from "../../index.js";
+import { COMMAND_PATHS } from "../../../app/Contracts/Commands/Command.js";
+import { SA } from "../../../index.js";
 
 new SA.Command(
   {

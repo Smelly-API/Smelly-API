@@ -21,6 +21,11 @@ const PLUGINS =
 PLUGINS.push(`Smelly Api`);
 
 /**
+ * The main plugin this is used for grabbing readme and other files in the plugins root
+ */
+const MAIN_PLUGIN = PLUGINS[0];
+
+/**
  * The FILE_NAME of this pack on output
  */
 const FILE_NAME = args[1] ?? "sample";

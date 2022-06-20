@@ -1,5 +1,5 @@
 import { Player, world } from "mojang-minecraft";
-import { SA } from "../../index.js";
+import { SA } from "../../../index.js";
 import { CHAT_COOLDOWN, DEFAULT_RANK } from "./config.js";
 
 /**

@@ -97,12 +97,14 @@ export class SA {
 }
 
 world.events.worldInitialize.subscribe(({ propertyRegistry }) => {
-  let q = new DynamicPropertiesDefinition();
-  q.defineString("objective", 16);
-  propertyRegistry.registerEntityTypeDynamicProperties(
-    q,
-    EntityTypes.get("mcbehub:floating_text")
-  );
+  try {
+    let q = new DynamicPropertiesDefinition();
+    q.defineString("objective", 16);
+    propertyRegistry.registerEntityTypeDynamicProperties(
+      q,
+      EntityTypes.get("mcbehub:floating_text")
+    );
+  } catch (error) {}
 
   /**
    * Loads Plugins
