@@ -2,7 +2,7 @@
   "header": {
     "name": "Smelly Chat Ranks",
     "description": "Adds chat ranks to world",
-    "version": [5, 0, 0]
+    "version": [6, 0, 0]
   },
   "metadata": {
     "authors": ["Smell of curry"],

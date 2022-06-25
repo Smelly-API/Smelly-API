@@ -1,6 +1,12 @@
 const JSZip = require("jszip");
 const fs = require("fs");
 const { v4 } = require("uuid");
+const {
+  PLUGIN_PATH,
+  DEFAULT_PLUGIN,
+  PLUGIN_IGNORE_PUSH,
+  BUILD_PATH,
+} = require("./config");
 
 const zip = new JSZip();
 var args = process.argv.slice(2);
@@ -8,7 +14,7 @@ var args = process.argv.slice(2);
 /**
  * A list of PLUGINS that are possible to be used
  */
-const AVAILABLE_PLUGINS = fs.readdirSync("./scripts/Smelly Api/vendor");
+const AVAILABLE_PLUGINS = fs.readdirSync(PLUGIN_PATH);
 
 /**
  * List of PLUGINS to load in this pack
@@ -18,7 +24,7 @@ const PLUGINS =
     ? args[0].split(",")
     : AVAILABLE_PLUGINS.filter((f) => f != "autoload.js");
 
-PLUGINS.push(`Smelly Api`);
+PLUGINS.push(DEFAULT_PLUGIN);
 
 /**
  * The main plugin this is used for grabbing readme and other files in the plugins root
@@ -37,7 +43,7 @@ const VERSION = args[2]
   ? args[2]
   : incrementVersion(
       fs
-        .readdirSync("./build/output")
+        .readdirSync(BUILD_PATH)
         .find((f) => f.startsWith(FILE_NAME))
         ?.match(/(\d+\.\d+\.\d+)/)?.[0]
     ) ?? "1.0.0";
@@ -185,9 +191,16 @@ zip.file(
   })
 );
 
+var files = fs.readdirSync(PLUGIN_PATH + `/${MAIN_PLUGIN}`);
+for (var i in files) {
+  if (PLUGIN_IGNORE_PUSH.includes(files[i])) continue;
+  var name = PLUGIN_PATH + `/${MAIN_PLUGIN}` + "/" + files[i];
+  zip.file(files[i], fs.readFileSync(name, "utf8"));
+}
+
 zip
   .generateNodeStream({ type: "nodebuffer", streamFiles: true })
-  .pipe(fs.createWriteStream(`./build/output/${FILE_NAME} v${VERSION}.zip`))
+  .pipe(fs.createWriteStream(`${BUILD_PATH}/${FILE_NAME} v${VERSION}.zip`))
   .on("finish", function () {
-    console.log("sample.zip written.");
+    console.log(`Pack Compiled and Outputed in: '${BUILD_PATH}/${FILE_NAME} v${VERSION}.zip'`);
   });

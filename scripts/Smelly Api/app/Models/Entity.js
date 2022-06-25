@@ -186,5 +186,14 @@ export class EntityBuilder {
       Math.floor(loc.z)
     );
   }
+
+  /**
+   * Despawns a entity
+   * @param {Entity} entity entity to despawn
+   */
+  despawn(entity) {
+    entity.teleport(new Location(0, -64, 0), entity.dimension, 0, 0);
+    entity.kill();
+  }
 }
 export const EntityBuild = new EntityBuilder();
