@@ -3,6 +3,7 @@
     "@types/mojang-gametest": "^0.1.4",
     "@types/mojang-minecraft": "^0.1.6",
     "@types/mojang-minecraft-ui": "^0.1.0",
+    "@vitalets/google-translate-api": "^8.0.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.0",
     "node-fetch": "^3.2.3",

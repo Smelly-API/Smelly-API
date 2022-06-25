@@ -99,10 +99,10 @@
                     "value": "cps_protection"
                   }
                 ]
-              }
+              },
+              "event": "remove_cps_protection_tag"
             },
-            "deals_damage": false,
-            "event": "remove_cps_protection_tag"
+            "deals_damage": false
           }
         ]
       },

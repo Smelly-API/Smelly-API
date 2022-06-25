@@ -6,7 +6,9 @@ const {
   DEFAULT_PLUGIN,
   PLUGIN_IGNORE_PUSH,
   BUILD_PATH,
+  LANGUAGES,
 } = require("./config");
+const translate = require("@vitalets/google-translate-api");
 
 const zip = new JSZip();
 var args = process.argv.slice(2);
@@ -27,14 +29,21 @@ const PLUGINS =
 PLUGINS.push(DEFAULT_PLUGIN);
 
 /**
- * The main plugin this is used for grabbing readme and other files in the plugins root
+ * @typedef {Object} Plugin
+ * @property {String} name name of plugin
+ * @property {Manifest} manifest manifest of the plugin
  */
-const MAIN_PLUGIN = PLUGINS[0];
 
 /**
- * The FILE_NAME of this pack on output
+ * The main plugin this is used for grabbing readme and other files in the plugins root
+ * @type {Plugin}
  */
-const FILE_NAME = args[1] ?? "sample";
+const MAIN_PLUGIN = {
+  name: PLUGINS[0],
+  manifest: JSON.parse(
+    fs.readFileSync(`${PLUGIN_PATH}/${PLUGINS[0]}/manifest.json`, "utf8")
+  ),
+};
 
 /**
  * The VERSION of this pack
@@ -44,7 +53,7 @@ const VERSION = args[2]
   : incrementVersion(
       fs
         .readdirSync(BUILD_PATH)
-        .find((f) => f.startsWith(FILE_NAME))
+        .find((f) => f.startsWith(MAIN_PLUGIN.name))
         ?.match(/(\d+\.\d+\.\d+)/)?.[0]
     ) ?? "1.0.0";
 
@@ -85,13 +94,13 @@ function getFiles(dir, files_) {
           fs
             .readFileSync(name, "utf8")
             .replace(
-              /const Plugins = \[(.*?)\];/,
+              /const Plugins = \[([\S\s]*?)\];/,
               `const Plugins = ${JSON.stringify(PLUGINS)}`
             )
         );
         continue;
       }
-      zip.file(name, fs.readFileSync(name, "utf8"));
+      zip.file(name, fs.readFileSync(name));
     }
   }
   return files_;
@@ -191,16 +200,62 @@ zip.file(
   })
 );
 
-var files = fs.readdirSync(PLUGIN_PATH + `/${MAIN_PLUGIN}`);
+var files = fs.readdirSync(PLUGIN_PATH + `/${MAIN_PLUGIN.name}`);
 for (var i in files) {
   if (PLUGIN_IGNORE_PUSH.includes(files[i])) continue;
-  var name = PLUGIN_PATH + `/${MAIN_PLUGIN}` + "/" + files[i];
-  zip.file(files[i], fs.readFileSync(name, "utf8"));
+  var name = PLUGIN_PATH + `/${MAIN_PLUGIN.name}` + "/" + files[i];
+  zip.file(files[i], fs.readFileSync(name));
 }
 
-zip
-  .generateNodeStream({ type: "nodebuffer", streamFiles: true })
-  .pipe(fs.createWriteStream(`${BUILD_PATH}/${FILE_NAME} v${VERSION}.zip`))
-  .on("finish", function () {
-    console.log(`Pack Compiled and Outputed in: '${BUILD_PATH}/${FILE_NAME} v${VERSION}.zip'`);
-  });
+async function generateLangFiles(name, description) {
+  for (const lanuage of LANGUAGES) {
+    let langName = await translate(name, {
+      to: lanuage.iso,
+    }).then((res) => res.text);
+    let langDescription = await translate(description, {
+      to: lanuage.iso,
+    }).then((res) => res.text);
+    zip.file(
+      `texts/${lanuage.local}.lang`,
+      `pack.name=${langName}\npack.description=${langDescription}`
+    );
+  }
+  zip.file(
+    "texts/languages.json",
+    JSON.stringify(LANGUAGES.map((lang) => lang.local))
+  );
+  zip.file(
+    "texts/language_names.json",
+    JSON.stringify(LANGUAGES.map((lang) => [lang.local, lang.name]))
+  );
+}
+
+(async () => {
+  await generateLangFiles(
+    MAIN_PLUGIN.manifest.header.name,
+    MAIN_PLUGIN.manifest.header.description
+  );
+
+  zip
+    .generateNodeStream({ type: "nodebuffer", streamFiles: true })
+    .pipe(
+      fs.createWriteStream(`${BUILD_PATH}/${MAIN_PLUGIN.name} v${VERSION}.zip`)
+    )
+    .on("finish", function () {
+      console.log(
+        `Pack.zip Compiled and Outputed in: '${BUILD_PATH}/${MAIN_PLUGIN.name} v${VERSION}.zip'`
+      );
+    });
+  zip
+    .generateNodeStream({ type: "nodebuffer", streamFiles: true })
+    .pipe(
+      fs.createWriteStream(
+        `${BUILD_PATH}/${MAIN_PLUGIN.name} v${VERSION}.mcpack`
+      )
+    )
+    .on("finish", function () {
+      console.log(
+        `Pack.mcpack Compiled and Outputed in: '${BUILD_PATH}/${MAIN_PLUGIN.name} v${VERSION}.zip'`
+      );
+    });
+})();
