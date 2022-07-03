@@ -59,7 +59,7 @@ export class Page {
        */
       const ench = itemEnchants.getEnchantment(e);
       if (!ench) continue;
-      ItemEnchantTypes.push({ level: ench.level, id: ench.type.id });
+      ItemEnchantTypes.push({ level: ench.level, id: ench.type?.id });
     }
     return {
       itemStack: item,

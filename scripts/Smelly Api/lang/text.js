@@ -9,4 +9,5 @@ export const text = {
   "api.Providers.form.invaildFormtype": (a, b) => {
     `The type ${a} is not a valid type, Vaild types: ${JSON.stringify(b)}`;
   },
+  "api.ChestGUI.error.pagenotfound": (a) => `Page ${a} not found!`,
 };

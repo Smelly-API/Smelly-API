@@ -18,6 +18,7 @@ import {
 import { IEntity } from "../../../Models/Entity.js";
 import { IWorld } from "../../../Models/World.js";
 import { ItemGrabbedCallback } from "./ItemGrabbedCallback.js";
+import { text } from "../../../../lang/text.js";
 
 /**
  * @typedef {Object} MappedInventoryItem a inventory that has been saved
@@ -116,7 +117,7 @@ export class ChestGUI {
         ?.find((e) => e.getTags().includes(`id:${this.player.name}`))
         ?.triggerEvent("despawn");
       let e = world.events.entityCreate.subscribe((data) => {
-        if (data.entity.id == ENTITY_INVENTORY) {
+        if (data.entity?.id == ENTITY_INVENTORY) {
           this.entity = data.entity;
           this.entity.addTag(`id:${this.player.name}`);
           this.setPage(DEFAULT_STATIC_PAGE_ID);
@@ -160,6 +161,7 @@ export class ChestGUI {
      * @type {Page}
      */
     const page = PAGES[id];
+    if (!page) return new Error(text["api.ChestGUI.error.pagenotfound"](id));
 
     page.fillType(this.entity, page);
 
@@ -206,7 +208,7 @@ export class ChestGUI {
       /**
        * @type {InventoryComponentContainer}
        */
-      this.setPage(this.page.id);
+      this.setPage(this.page?.id);
     } else {
       // item was taken from this page
       try {
@@ -220,7 +222,7 @@ export class ChestGUI {
         for (let i = 0; i < inventory.size; i++) {
           const item = inventory.getItem(i);
           if (!item) continue;
-          if (item.id == slot.item.id) {
+          if (item?.id == slot.item?.id) {
             itemsToLoad.push({ slot: i, item: item });
             if (i < 9) {
               this.player.runCommand(
@@ -234,7 +236,7 @@ export class ChestGUI {
           }
         }
         this.player.runCommand(
-          `clear @s ${slot.item.id} ${slot.item.data} ${slot.item.amount}`
+          `clear @s ${slot.item?.id} ${slot.item.data} ${slot.item.amount}`
         );
         for (const item of itemsToLoad) {
           inventory.setItem(item.slot, item.item);

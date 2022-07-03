@@ -18,6 +18,6 @@ world.events.tick.subscribe(() => {
   for (const player of world.getPlayers()) {
     if (IEntity.getHeldItem(player)?.id != GUI_ITEM) continue;
     let PLAYERS_GUI = CURRENT_GUIS[player.name];
-    if (!PLAYERS_GUI) PLAYERS_GUI = new ChestGUI(player);
+    if (!PLAYERS_GUI) CURRENT_GUIS[player.name] = new ChestGUI(player);
   }
 });
