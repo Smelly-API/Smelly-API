@@ -8,7 +8,7 @@ import {
   Player,
 } from "mojang-minecraft";
 
-export class EntityBuilder {
+export class IEntity {
   /**
    * Get entitie(s) at a position
    * @param {number} x X position of the entity
@@ -18,7 +18,7 @@ export class EntityBuilder {
    * @returns {Entity}
    * @example EntityBuilder.getEntityAtPos(0, 5, 0, { dimension: 'nether', ignoreType: ['minecraft:player']});
    */
-  getAtPos({ x, y, z }, dimension = "overworld") {
+  static getAtPos({ x, y, z }, dimension = "overworld") {
     try {
       return world
         .getDimension(dimension)
@@ -36,7 +36,7 @@ export class EntityBuilder {
    * @returns {Array<Entity>}
    * @example getClosetsEntitys(Entity, n=1, maxDistance = 10, type = Entity.type)
    */
-  getClosetsEntitys(entity, maxDistance = null, type = false, n = 2) {
+  static getClosetsEntitys(entity, maxDistance = null, type = false, n = 2) {
     let q = new EntityQueryOptions();
     q.location = entity.location;
     if (n) q.closest = n;
@@ -52,7 +52,7 @@ export class EntityBuilder {
    * @param {string} value what you want to search for
    * @example getTagStartsWith(Entity, "stuff:")
    */
-  getTagStartsWith(entity, value) {
+  static getTagStartsWith(entity, value) {
     const tags = entity.getTags();
     if (tags.length === 0) return null;
     const tag = tags.find((tag) => tag.startsWith(value));
@@ -67,7 +67,7 @@ export class EntityBuilder {
    * @returns {number} 0
    * @example getScore(Entity, 'Money');
    */
-  getScore(entity, objective) {
+  static getScore(entity, objective) {
     try {
       const command = entity.runCommand(
         `scoreboard players test @s "${objective}" * *`
@@ -83,7 +83,7 @@ export class EntityBuilder {
    * @returns "overworld" | "the end" | "nether"
    * @example getDimension('Smell of curry');
    */
-  getDimension(entity) {
+  static getDimension(entity) {
     for (const dimension of ["overworld", "nether", "the end"]) {
       if (entity.dimension == world.getDimension(dimension)) return dimension;
     }
@@ -95,7 +95,7 @@ export class EntityBuilder {
    * @returns {Boolean}
    * @example isDead(Entity);
    */
-  isDead(entity) {
+  static isDead(entity) {
     return (
       entity.hasComponent("minecraft:health") &&
       entity.getComponent("minecraft:health").current <= 0
@@ -107,7 +107,7 @@ export class EntityBuilder {
    * @returns {String}
    * @example getGenericName(Entity);
    */
-  getGenericName(entityName) {
+  static getGenericName(entityName) {
     return entityName.split(":")[1].replace(/_/g, " ");
   }
   /**
@@ -116,7 +116,7 @@ export class EntityBuilder {
    * @returns {Array<ItemStack>}
    * @example getGenericName(Entity);
    */
-  getInventory(entity) {
+  static getInventory(entity) {
     const inventory = entity.getComponent("minecraft:inventory").container;
     let items = [];
     for (let i = 0; i < inventory.size; i++) {
@@ -132,7 +132,7 @@ export class EntityBuilder {
    * @returns {ItemStack}
    * @example getHeldItem(Player);
    */
-  getHeldItem(player) {
+  static getHeldItem(player) {
     const inventory = player.getComponent("minecraft:inventory").container;
     return inventory.getItem(player.selectedSlot);
   }
@@ -143,7 +143,7 @@ export class EntityBuilder {
    * @returns {void}
    * @example giveItem(Entity, itemstack);
    */
-  giveItem(entity, item) {
+  static giveItem(entity, item) {
     const inventory = entity.getComponent("minecraft:inventory").container;
     inventory.addItem(item);
   }
@@ -153,7 +153,7 @@ export class EntityBuilder {
    * @returns {Object}
    * @example getCurrentChunk(Entity);
    */
-  getCurrentChunk(entity) {
+  static getCurrentChunk(entity) {
     return {
       x: Math.floor(entity.location.x / 16),
       z: Math.floor(entity.location.z / 16),
@@ -165,7 +165,7 @@ export class EntityBuilder {
    * @returns {Object}
    * @example getChunkCuboidPositions(Entity);
    */
-  getChunkCuboidPositions(entity) {
+  static getChunkCuboidPositions(entity) {
     const chunk = this.getCurrentChunk(entity);
     const pos1 = new BlockLocation(chunk.x * 16, -63, chunk.z * 16);
     const pos2 = pos1.offset(16, 383, 16);
@@ -179,7 +179,7 @@ export class EntityBuilder {
    * @param {Location} loc a location to convert
    * @returns {BlockLocation}
    */
-  locationToBlockLocation(loc) {
+  static locationToBlockLocation(loc) {
     return new BlockLocation(
       Math.floor(loc.x),
       Math.floor(loc.y),
@@ -191,9 +191,8 @@ export class EntityBuilder {
    * Despawns a entity
    * @param {Entity} entity entity to despawn
    */
-  despawn(entity) {
+  static despawn(entity) {
     entity.teleport(new Location(0, -64, 0), entity.dimension, 0, 0);
     entity.kill();
   }
 }
-export const EntityBuild = new EntityBuilder();

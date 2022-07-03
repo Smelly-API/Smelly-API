@@ -4,8 +4,8 @@ import {
   world,
 } from "mojang-minecraft";
 import { Return } from "./app/Exceptions/Return.js";
-import { EntityBuild } from "./app/Models/Entity.js";
-import { WorldBuild } from "./app/Models/World.js";
+import { IEntity } from "./app/Models/Entity.js";
+import { IWorld } from "./app/Models/World.js";
 import { Request } from "./app/Models/Request.js";
 import { Chat } from "./app/Providers/Chat.js";
 import { Command } from "./app/Contracts/Commands/Command.js";
@@ -22,6 +22,10 @@ import * as configuration from "./config/index.js";
 import * as tables from "./database/tables.js";
 import * as scheduling from "./app/Utilities/scheduling.js";
 import * as format from "./app/Utilities/formatter.js";
+import "./app/Contracts/Chest GUI/index.js";
+import { Page } from "./app/Contracts/Chest GUI/Models/Page.js";
+import { Item } from "./app/Contracts/Chest GUI/Models/Item.js";
+import { DefaultFill } from "./app/Contracts/Chest GUI/Models/FillTypes.js";
 
 /**
  * Smelly API
@@ -51,9 +55,9 @@ export class SA {
     return: Return,
   };
   static Models = {
-    entity: EntityBuild,
+    entity: IEntity,
     request: Request,
-    world: WorldBuild,
+    world: IWorld,
   };
   static Providers = {
     chat: Chat,
@@ -67,6 +71,13 @@ export class SA {
       scoreboard: ScoreboardDatabase,
       dynamic: DynamicPropertysDatabase,
     },
+  };
+  static ChestGUI = {
+    FillTypes: {
+      default: DefaultFill,
+    },
+    Page: Page,
+    Item: Item,
   };
 
   /**

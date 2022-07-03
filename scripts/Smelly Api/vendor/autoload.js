@@ -19,10 +19,11 @@ const Plugins = [
   // "Factions",
   // "Gambling",
   // "home",
-  "Leaderboards",
+  // "Leaderboards",
   // "Shop",
   "Smelly Api",
-  // "Stackable Mobs"
+  // "Stackable Mobs",
+  "Binocraft"
 ];
 
 for (const plugin of Plugins) {

@@ -14,7 +14,7 @@ module.exports = {
   /**
    * items to ignore in a plugin directory that shouldnt be pushed
    */
-  PLUGIN_IGNORE_PUSH: ["src", "manifest.json", ".git"],
+  PLUGIN_IGNORE_PUSH: ["src", "manifest.json", ".git", ".github"],
   /**
    * List of languages to there local, iso and name translation
    */

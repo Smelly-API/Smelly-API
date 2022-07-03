@@ -15,37 +15,43 @@
       "size:27": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 27
+          "inventory_size": 27,
+          "restrict_to_owner": true
         }
       },
       "size:36": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 36
+          "inventory_size": 36,
+          "restrict_to_owner": true
         }
       },
       "size:45": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 45
+          "inventory_size": 45,
+          "restrict_to_owner": true
         }
       },
       "size:54": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 54
+          "inventory_size": 54,
+          "restrict_to_owner": true
         }
       },
       "size:81": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 81
+          "inventory_size": 81,
+          "restrict_to_owner": true
         }
       },
       "size:108": {
         "minecraft:inventory": {
           "container_type": "inventory",
-          "inventory_size": 108
+          "inventory_size": 108,
+          "restrict_to_owner": true
         }
       }
     },
@@ -64,10 +70,24 @@
       "minecraft:conditional_bandwidth_optimization": {},
       "minecraft:inventory": {
         "container_type": "inventory",
-        "inventory_size": 54
+        "inventory_size": 54,
+        "restrict_to_owner": true
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:tameable": true,
+      "minecraft:health": {
+        "value": 999999,
+        "min": 1
       }
     },
     "events": {
+      "minecraft:on_tame": {},
       "despawn": {
         "add": {
           "component_groups": ["despawn"]

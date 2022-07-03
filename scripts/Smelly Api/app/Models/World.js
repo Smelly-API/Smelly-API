@@ -7,14 +7,14 @@ import {
   PropertyRegistry,
 } from "mojang-minecraft";
 
-export class WorldBuilder {
+export class IWorld {
   /**
    * Get list of players in game
    * @param {String} dimension dimension id you want to list
    * @returns {Array<string>}
    * @example PlayerBuilder.list();
    */
-  list(dimension = null) {
+   static list(dimension = null) {
     if (dimension)
       return [...world.getDimension(dimension).getPlayers()].map(
         (player) => player.nameTag
@@ -28,7 +28,7 @@ export class WorldBuilder {
    * @returns {boolean}
    * @example PlayerBuilder.has('notbeer');
    */
-  has(player, dimension = null) {
+   static has(player, dimension = null) {
     return this.list(dimension).includes(player);
   }
   /**
@@ -36,7 +36,7 @@ export class WorldBuilder {
    * @param {Player.name} player players nameTag
    * @returns {Player | null}
    */
-  fetch(player) {
+   static fetch(player) {
     return [...world.getPlayers()].find((plr) => plr.name === player);
   }
   /**
@@ -48,7 +48,7 @@ export class WorldBuilder {
    * @returns {Entity}
    * @example EntityBuilder.getEntityAtPos(0, 5, 0, { dimension: 'nether', ignoreType: ['minecraft:player']});
    */
-  getEntityAtPos(x, y, z, dimension = "overworld") {
+   static getEntityAtPos(x, y, z, dimension = "overworld") {
     try {
       return world
         .getDimension(dimension)
@@ -58,6 +58,22 @@ export class WorldBuilder {
     }
   }
 
-  registerStringProperty(identifer, maxLength) {}
+  /**
+   * Returns all entitys
+   * @param {String} type id of the entities to get
+   * @returns {Array<Entity>}
+   */
+   static getEntitys(type = null) {
+    /**
+     * @type {Array<Entity>}
+     */
+    let entitys = [];
+    for (const dimension of ["overworld", "nether", "the end"]) {
+      [...world.getDimension(dimension).getEntities()].forEach((e) =>
+        entitys.push(e)
+      );
+    }
+    if (type) return entitys.filter((e) => e.id == type);
+    return entitys;
+  }
 }
-export const WorldBuild = new WorldBuilder();

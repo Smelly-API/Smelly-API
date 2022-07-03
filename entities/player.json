@@ -34,6 +34,17 @@
       }
     },
     "component_groups": {
+      "smelly:spawn_inventory": {
+        "minecraft:spawn_entity": {
+          "entities": {
+            "min_wait_time": 0,
+            "max_wait_time": 0,
+            "spawn_entity": "smelly:tamed_inventory",
+            "single_use": true,
+            "num_to_spawn": 1
+          }
+        }
+      },
       "minecraft:add_bad_omen": {
         "minecraft:spell_effects": {
           "add_effects": [
@@ -262,6 +273,11 @@
       }
     },
     "events": {
+      "smelly:spawn_inventory": {
+        "add": {
+          "component_groups": ["smelly:spawn_inventory"]
+        }
+      },
       "remove_cps_protection_tag": {
         "run_command": {
           "command": ["tag @s remove cps_protection"]
