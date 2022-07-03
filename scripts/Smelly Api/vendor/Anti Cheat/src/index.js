@@ -8,8 +8,12 @@ export let db_freezes = new SA.Utilities.storage.scoreboard("freezes");
 export let db_bans = new SA.Utilities.storage.scoreboard("bans");
 
 world.events.playerJoin.subscribe((data) => {
-  try {
-    data.player.runCommand(`scoreboard objectives add dummy dummy`);
-  } catch (error) {}
-  data.player.runCommand(`scoreboard players add @s dummy 0`);
+  const { player } = data;
+  let e = world.events.tick.subscribe((tick) => {
+    try {
+      player.runCommand(`scoreboard objectives add dummyid dummy`);
+      player.runCommand(`scoreboard players add @s dummyid 0`);
+      world.events.tick.unsubscribe(e);
+    } catch (error) {}
+  });
 });
