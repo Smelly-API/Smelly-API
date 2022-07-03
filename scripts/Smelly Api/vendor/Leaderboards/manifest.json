@@ -1,0 +1,18 @@
+{
+  "header": {
+    "name": "Smelly Leaderboards",
+    "description": "Leaderboard system in MCPE",
+    "version": [5, 0, 0]
+  },
+  "dependencies": [
+    {
+      "directory": "entities",
+      "include": ["player.json", "floating_text.json"]
+    }
+  ],
+  "metadata": {
+    "authors": ["Smell of curry"],
+    "license": "MIT",
+    "url": "https://github.com/smell-of-curry/Smelly-Anti-Cheat"
+  }
+}
