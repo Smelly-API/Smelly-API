@@ -1,0 +1,33 @@
+{
+  "header": {
+    "name": "Smelly Anti-Cheat",
+    "description": "Protects against hackers",
+    "version": [2, 0, 0]
+  },
+  "dependencies": [
+    {
+      "directory": "animation_controllers",
+      "include": [
+        "digging.json",
+        "eating.json",
+        "gliding.json",
+        "ground.json",
+        "jumping.json",
+        "levitating.json",
+        "moving.json",
+        "riding.json",
+        "swimming.json",
+        "using_item.json"
+      ]
+    },
+    {
+      "directory": "entities",
+      "include": ["player.json"]
+    }
+  ],
+  "metadata": {
+    "authors": ["Smell of curry"],
+    "license": "MIT",
+    "url": "https://github.com/smell-of-curry/Smelly-Anti-Cheat"
+  }
+}
