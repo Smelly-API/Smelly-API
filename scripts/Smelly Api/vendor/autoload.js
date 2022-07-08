@@ -15,9 +15,7 @@
 const Plugins = [
   "Anti Cheat",
   "Chat Ranks",
-  "Leaderboards",
-  "Smelly Api",
-  "Binocraft"
+  "Leaderboards"
 ];
 
 for (const plugin of Plugins) {
