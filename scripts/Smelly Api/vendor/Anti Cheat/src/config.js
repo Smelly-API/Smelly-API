@@ -274,3 +274,26 @@ export const BANNED_BLOCKS = [
   "minecraft:beehive",
   "minecraft:beenest",
 ];
+
+/**
+ * A List of all containers a item could be in
+ */
+export const BLOCK_CONTAINERS = [
+  "minecraft:chest",
+  //"minecraft:barrel",
+  "minecraft:trapped_chest",
+  //"minecraft:dispenser",
+  //"minecraft:dropper",
+  //"minecraft:furnace",
+  //"minecraft:blast_furnace",
+  //"minecraft:lit_furnace",
+  //"minecraft:lit_blast_furnace",
+  //"minecraft:hopper",
+  //"minecraft:shulker_box",
+  //"minecraft:undyed_shulker_box",
+];
+
+/**
+ * The block size to check for blockContainers
+ */
+export const CHECK_SIZE = { x: 7, y: 7, z: 7 };

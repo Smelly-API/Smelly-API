@@ -8,7 +8,6 @@
 | Please do not remove or move this line anywhere in this file
 | 
 */
-
 import { SA } from "./Smelly Api/index.js";
 
 // Other code can go beyond this point

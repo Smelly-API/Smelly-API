@@ -1,4 +1,4 @@
-import { BlockInventoryComponentContainer } from "mojang-minecraft";
+import { BlockInventoryComponentContainer, world } from "mojang-minecraft";
 
 export class BlockInventory {
   /**
@@ -15,7 +15,7 @@ export class BlockInventory {
   }
 
   /**
-   * Loads this inventory on a block
+   * Loads this inventory onto a BlockInventoryComponentContainer
    * @param {BlockInventoryComponentContainer} block block to load on
    */
   load(block) {

@@ -1,0 +1,14 @@
+{
+  "format_version": "1.17.0",
+  "minecraft:volume": {
+    "description": {
+      "identifier": "smelly:region"
+    },
+    "components": {
+      "minecraft:fog": {
+        "fog_identifier": "minecraft:fog_savanna",
+        "priority": 1
+      }
+    }
+  }
+}
