@@ -1,10 +1,11 @@
 import { Location, world } from "mojang-minecraft";
+import { SA } from "../../../../../index.js";
 import { db_freezes } from "../../index.js";
 
 world.events.tick.subscribe((tick) => {
   try {
     for (const player of world.getPlayers()) {
-      const freezeData = db_freezes.get(player.scoreboard.id);
+      const freezeData = db_freezes.get(SA.Models.entity.getId(player));
       if (!freezeData) return;
       player.teleport(
         new Location(

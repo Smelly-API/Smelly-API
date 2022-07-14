@@ -195,4 +195,22 @@ export class IEntity {
     entity.teleport(new Location(0, -64, 0), entity.dimension, 0, 0);
     entity.kill();
   }
+  /**
+   * Gets a entitys Unique World Identifer
+   * @param {Entity} entity
+   */
+  static getId(entity) {
+    try {
+      return entity.scoreboard.id;
+    } catch (error) {
+      try {
+        entity.runCommand("scoreboard objectives add test dummy");
+      } catch (error) {}
+      try {
+        entity.runCommand("scoreboard players add @s test 0");
+      } catch (error) {}
+
+      return entity.scoreboard.id;
+    }
+  }
 }

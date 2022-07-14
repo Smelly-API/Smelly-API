@@ -20,7 +20,7 @@ export class Ban {
   ) {
     length = length ? SA.Utilities.format.MS(`${length} ${unit}`) : null;
     const data = {
-      key: player.scoreboard.id,
+      key: SA.Models.entity.getId(player),
       player: player.name,
       date: Date.now(),
       length: length,
@@ -28,6 +28,6 @@ export class Ban {
       reason: reason,
       by: by,
     };
-    db_bans.set(player.scoreboard.id, data);
+    db_bans.set(SA.Models.entity.getId(player), data);
   }
 }

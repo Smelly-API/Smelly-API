@@ -10,7 +10,7 @@ export class Freeze {
   constructor(player, reason = "No Reason") {
     const data = {
       player: player.name,
-      key: player.scoreboard.id,
+      key: SA.Models.entity.getId(player),
       reason: reason,
       location: {
         x: player.location.x,
@@ -19,6 +19,6 @@ export class Freeze {
         dimension: player.dimension.id,
       },
     };
-    db_freezes.set(player.scoreboard.id, data);
+    db_freezes.set(SA.Models.entity.getId(player), data);
   }
 }

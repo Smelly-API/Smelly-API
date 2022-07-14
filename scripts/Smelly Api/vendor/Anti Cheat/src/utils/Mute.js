@@ -20,13 +20,13 @@ export class Mute {
   ) {
     length = length ? SA.Utilities.format.MS(`${length} ${unit}`) : null;
     const data = {
-      player: player.scoreboard.id,
+      player: SA.Models.entity.getId(player),
       date: Date.now(),
       length: length,
       expire: length ? length + Date.now() : null,
       reason: reason,
       by: by,
     };
-    db_mutes.set(player.scoreboard.id, data);
+    db_mutes.set(SA.Models.entity.getId(player), data);
   }
 }
