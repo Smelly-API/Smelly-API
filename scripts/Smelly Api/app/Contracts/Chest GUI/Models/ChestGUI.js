@@ -61,6 +61,7 @@ export class ChestGUI {
    */
   constructor(player, entity = null) {
     this.player = player;
+    this.playersName = player.name;
     this.entity = entity;
     this.previousMap = null;
     /**
@@ -100,12 +101,12 @@ export class ChestGUI {
         } catch (error) {}
       }),
       playerLeave: world.events.playerLeave.subscribe(({ playerName }) => {
-        if (playerName != this.player.name) return;
+        if (playerName != this.playersName) return;
         this.kill();
       }),
     };
 
-    CURRENT_GUIS[this.player.name] = this;
+    CURRENT_GUIS[this.playersName] = this;
   }
 
   /**
@@ -114,12 +115,12 @@ export class ChestGUI {
   summon() {
     try {
       IWorld.getEntitys(ENTITY_INVENTORY)
-        ?.find((e) => e.getTags().includes(`id:${this.player.name}`))
+        ?.find((e) => e.getTags().includes(`id:${this.playersName}`))
         ?.triggerEvent("despawn");
       let e = world.events.entityCreate.subscribe((data) => {
         if (data.entity?.id == ENTITY_INVENTORY) {
           this.entity = data.entity;
-          this.entity.addTag(`id:${this.player.name}`);
+          this.entity.addTag(`id:${this.playersName}`);
           this.setPage(DEFAULT_STATIC_PAGE_ID);
         }
         world.events.entityCreate.unsubscribe(e);
@@ -148,7 +149,7 @@ export class ChestGUI {
     for (const key in this.events) {
       world.events[key].unsubscribe(this.events[key]);
     }
-    delete CURRENT_GUIS[this.player.name];
+    delete CURRENT_GUIS[this.playersName];
   }
 
   /**

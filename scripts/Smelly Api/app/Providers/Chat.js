@@ -23,6 +23,7 @@ export class Chat {
       return { error: true };
     }
   }
+
   /**
    * Runs a Command
    * @param {string} command a minecraft /command
@@ -41,6 +42,7 @@ export class Chat {
       return { error: true };
     }
   }
+  
   /**
    * Run an array of commands
    * @param {Array<string>} cmds Put '%' before your commands. It will make it so it only executes if all the commands that came before it executed successfully!

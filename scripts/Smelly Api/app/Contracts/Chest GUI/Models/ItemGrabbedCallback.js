@@ -1,3 +1,8 @@
+import {
+  ActionFormData,
+  MessageFormData,
+  ModalFormData,
+} from "mojang-minecraft-ui";
 import { ChestGUI } from "./ChestGUI";
 
 export class ItemGrabbedCallback {

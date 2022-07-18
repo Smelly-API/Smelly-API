@@ -21,7 +21,9 @@ import { CHAT_COOLDOWN, DEFAULT_RANK } from "./config.js";
 const COOLDOWNS = {};
 
 /**
- * Formats the Chat Ranks
+ * Formats a message into a chat rank message
+ * @param {Player} player player that will have this formated on
+ * @returns {String} Formated chat rank message
  */
 const FORMAT = (player) =>
   `§l§8[§r${ranks(player).join("§r§l§8][§r")}§l§8]§r §7${player.nameTag}:§r`;
