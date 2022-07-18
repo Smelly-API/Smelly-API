@@ -13,10 +13,9 @@
  * An array of folder names, to add a plugin simply add the folder name to this array
  */
 const Plugins = [
-  // "Anti Cheat",
+  "Anti Cheat",
   "Chat Ranks",
-  // "Leaderboards",
-  "Binocraft",
+  "Leaderboards",
   "Smelly Api"
 ];
 
