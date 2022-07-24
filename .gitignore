@@ -3,6 +3,7 @@ node_modules
 package-lock.json
 build/output/*
 scripts/Smelly Api/vendor/*
+!scripts/Smelly Api/vendor/autoload.js
 !scripts/Smelly Api/vendor/Smelly API
 !scripts/Smelly Api/vendor/Chat Ranks
 !scripts/Smelly Api/vendor/Leaderboards

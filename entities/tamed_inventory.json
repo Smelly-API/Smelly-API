@@ -13,6 +13,10 @@
       "minecraft:transformation": {
         "into": "mcbehub:inventory<minecraft:on_tame>",
         "keep_owner": true
+      },
+      "minecraft:health": {
+        "value": 999999,
+        "min": 1
       }
     }
   }

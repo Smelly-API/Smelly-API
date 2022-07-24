@@ -42,6 +42,9 @@ export class SA {
   static prefix = configuration.commands.PREFIX;
   static version = configuration.app.VERSION;
   static config = configuration;
+  /**
+   * @type {Object<string, ScoreboardDatabase>}
+   */
   static tables = tables;
   static Command = Command;
   static Permission = Permission;

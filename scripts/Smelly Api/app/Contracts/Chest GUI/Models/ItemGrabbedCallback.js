@@ -1,8 +1,12 @@
 import {
   ActionFormData,
+  ActionFormResponse,
   MessageFormData,
+  MessageFormResponse,
   ModalFormData,
+  ModalFormResponse,
 } from "mojang-minecraft-ui";
+import { sleep } from "../../../Utilities/scheduling";
 import { ChestGUI } from "./ChestGUI";
 
 export class ItemGrabbedCallback {
@@ -55,5 +59,16 @@ export class ItemGrabbedCallback {
       "minecraft:inventory"
     ).container;
     container.setItem(this.change.slot, this.slot.item.itemStack);
+  }
+
+  /**
+   * Opens a form to the player
+   * @param {ActionFormData | ModalFormData | MessageFormData} form form to load
+   * @returns {Promise<ActionFormResponse | ModalFormResponse | MessageFormResponse>}
+   */
+  async FormAction(form) {
+    this.CloseAction();
+    await sleep(5)
+    return await form.show(this.gui.player);
   }
 }

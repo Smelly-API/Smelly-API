@@ -1,4 +1,4 @@
-import { world } from "mojang-minecraft";
+import { Entity, world } from "mojang-minecraft";
 import { COMMAND_PATHS } from "../../../app/Contracts/Commands/Command.js";
 import { SA } from "../../../index.js";
 
@@ -94,3 +94,68 @@ new SA.Command(
     }
   }
 );
+
+const dbcm = new SA.Command({
+  name: "database",
+  description: "Interacts with SA Database",
+  aliases: ["db"],
+});
+
+dbcm
+  .addSubCommand({
+    name: "get",
+    tags: ["staff"],
+  })
+  .addOption("table", "string", "Table to grab from")
+  .addOption("key", "string", "Key to grab")
+  .executes((ctx, { table, key }) => {
+    try {
+      console.warn(JSON.stringify(SA.tables[table].MEMORY));
+      const data = SA.tables[table].get(key);
+      if (data) {
+        ctx.reply(data);
+      } else {
+        ctx.reply(`No data could be found for key ${key}`);
+      }
+    } catch (error) {
+      ctx.reply(error + error.stack);
+    }
+  });
+
+dbcm
+  .addSubCommand({
+    name: "set",
+    tags: ["staff"],
+  })
+  .addOption("table", "string", "Table to set to")
+  .addOption("key", "string", "Key to set")
+  .addOption("value", "string", "Value to assign to the key")
+  .executes((ctx, { table, key, value }) => {
+    try {
+      SA.tables[table].set(key, value);
+      ctx.reply(`Set Key: "${key}", to value: "${value}" on table: "${table}"`);
+    } catch (error) {
+      ctx.reply(error + error.stack);
+    }
+  });
+
+/**
+ * Gets the score recorded for {displayName} on {objective}
+ * @param {String} objective Objective to get from
+ * @param {String | Entity} target he player-visible name of the identity.
+ * @param {Boolean} useZero If the return should be null if its not found or 0.
+ * @returns {number} Score that Was recorded for {displayName} on {Objective}
+ * @example getScore("objective", "Smell of curry"): number
+ */
+function getScore(objective, target, useZero = false) {
+  try {
+    const obj = world.scoreboard.getObjective(objective);
+    const p =
+      typeof target == "string"
+        ? o.getParticipants().find((p) => p.displayName == target)
+        : target.scoreboard;
+    return obj.getScore(part);
+  } catch (error) {
+    return useZero ? null : 0;
+  }
+}
